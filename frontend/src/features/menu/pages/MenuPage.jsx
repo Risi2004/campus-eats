@@ -3,8 +3,10 @@ import { useState } from "react";
 import { useDebounce } from "../hooks/useDebounce";
 import { useFetch } from "../hooks/useFetch";
 
+const API_URL = import.meta.env.VITE_API_URL || "";
+
 function MenuPage() {
-    const { data: dishes, isLoading, error } = useFetch("/api/menu");
+    const { data: dishes, isLoading, error } = useFetch(`${API_URL}/api/menu`);
     const [query, setQuery] = useState("");
     const debounced = useDebounce(query, 400);
     const filtered = (dishes || []).filter((d) =>
